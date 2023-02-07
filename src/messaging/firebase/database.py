@@ -68,4 +68,4 @@ class Message:
 
                 print(f'{colorama.Fore.GREEN}{date}{colorama.Fore.RESET} {colorama.Fore.BLUE}{userSent}{colorama.Fore.RESET}: {message}')
                 readMessages.append(doc.id)
-                db.collection(u'messages').document(doc.id).delete()
+                #db.collection(u'messages').document(doc.id).delete()
