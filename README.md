@@ -1,0 +1,1 @@
+ALl code is inside the server folder as it all works together to run the Flask website, although if you just want to run it as a CLI application just run client.py inside the server folder :)

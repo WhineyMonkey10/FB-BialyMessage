@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+</head>
+<body>
+    <form action="/chat" method="POST">
+        <input type="text" name="message" placeholder="Message">
+        <input type="submit" value="Send">
+    </form>
+
+    <script>
+        window.onload = () => {
+            function fetch_content() {
+                fetch("{{ url_for('getMessages') }}")
+                    .then(response => response.text())
+                    .then(fragmented_html => {
+                        document.getElementById('messages').innerText = fragmented_html;
+                    });
+            }
+            while (true) {
+                setTimeout(fetch_content, 3000)
+            }
+        };
+
+    </script>
+
+
+    <p id="messages"></p>
+</body>
+</html>
