@@ -1,6 +1,6 @@
 import customtkinter as ctk
 from authentication.customAuth.firebaseCustom.database import *
-from authentication.customAuth.firebaseCustom.encrypt import *
+from archive.authentication.encrypt import *
 
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("dark-blue")
