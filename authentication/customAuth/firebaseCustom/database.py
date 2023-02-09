@@ -6,6 +6,7 @@ from google.cloud import storage
 import datetime
 import colorama
 from encrypt import encrypt
+import base64
 
 # Authenticate with ADC
 
@@ -24,6 +25,12 @@ db = firestore.client()
 class Auth:
     def __init__(self) -> None:
         pass
+    
+    def encrypt(string):
+        encryptBytes = string.encode("ascii")
+        encryptString = base64.b64encode(encryptBytes)
+        encryptString = encryptString.decode("ascii")
+        return encryptString
     
     def createUser(username, password):
         
