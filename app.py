@@ -19,11 +19,6 @@ def chatGUI():
         ctk.CTkLabel(master=scrollable_frame, text=message).pack()
     
     def chat(message):
-        username = " ".join(Gusername) 
-        username = username.replace("[", "")
-        username = username.replace("]", "")
-        username = username.replace("'", "")
-        addMessageToFrame(f"{username}: {message}")
         input_field.option_clear()
         Message.sendMessage(message, username)
 
@@ -100,12 +95,27 @@ def adminGUI():
     
     def createAccount(username, password):
         Auth.createUser(username, password)
-        print("Account created")
-    
+        confirmMessage.configure(text="Account created")
+        
+    def deleteAccount(username):
+        Auth.deleteUser(username)
+        confirmMessage.configure(text="Account deleted")
+        
     username = ctk.CTkEntry(master=frame, placeholder_text="Username")
     password = ctk.CTkEntry(master=frame, placeholder_text="Password")
     
     createAccountButton = ctk.CTkButton(master=frame, text="Create Account", command=lambda: createAccount(username.get(), password.get()))
+    deleteAccountButton = ctk.CTkButton(master=frame, text="Delete Account", command=lambda: deleteAccount(username.get()))
+    
+    confirmMessage = ctk.CTkLabel(master=frame, text="")
+    
+    username.pack(padx=30, pady=5)
+    password.pack(padx=30, pady=5)
+    
+    createAccountButton.pack(padx=30, pady=5)
+    deleteAccountButton.pack(padx=30, pady=5)
+    
+    confirmMessage.pack(padx=30, pady=5)
 
 loginGUI()
 
