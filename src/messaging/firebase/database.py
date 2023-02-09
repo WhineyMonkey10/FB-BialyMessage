@@ -55,11 +55,14 @@ class Message:
                 #print(f'{doc.id} => {doc.to_dict()}')
                 readMessages.append(doc.id)
                 #db.collection(u'messages').document(doc.id).delete()
-                messageContentDB = doc.to_dict()
-                
-                
-                return messageContentDB
-                
+                messageContent = doc.to_dict()
+                if readMessages != readMessages:
+                    return None
+                else:
+                    return messageContent
+            
+            # Check if readMessages has changed
+
     def readMessages():
         docs = db.collection(u'messages').stream()
         for doc in docs:
