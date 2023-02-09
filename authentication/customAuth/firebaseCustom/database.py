@@ -5,7 +5,6 @@ from firebase_admin import firestore, credentials
 from google.cloud import storage
 import datetime
 import colorama
-from encrypt import encrypt
 import base64
 
 # Authenticate with ADC
@@ -50,7 +49,7 @@ class Auth:
             
             user = {
                 u'username': u"{}".format(username),
-                u'password': u"{}".format(encrypt(password)),
+                u'password': u"{}".format(Auth.encrypt(password)),
             }
     
         db.collection(u'users').document(username).set(user)
@@ -80,15 +79,13 @@ class Auth:
         return True
     
     def checkUser(username, password):
-        doc = db.collection(u'users').document(username).get()
-        
-        if doc.to_dict()['username'] == username:
-            
-            if doc.to_dict()['password'] == encrypt(password):
-                return True
+        if db.collection(u'users').document(username).get().exists:
+            if Auth.getUserbyUsername(username)[1] == Auth.encrypt(password):
+                if username == "admin":
+                    return "admin"
+                else:
+                    return True
             else:
                 return False
         else:
             return False
-        
-    

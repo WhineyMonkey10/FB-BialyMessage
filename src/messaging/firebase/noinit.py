@@ -6,15 +6,7 @@ from google.cloud import storage
 import datetime
 import colorama
 
-# Authenticate with ADC
-
-def auth(projectid):
-    cred = credentials.ApplicationDefault()
-    firebase_admin.initialize_app(cred, {
-    'projectId': projectid
-    })
 readMessages = []
-auth("bialymessage")
 
 db = firestore.client()
 
@@ -55,10 +47,15 @@ class Message:
                 #print(f'{doc.id} => {doc.to_dict()}')
                 readMessages.append(doc.id)
                 #db.collection(u'messages').document(doc.id).delete()
-                messageContentDB = doc.to_dict()
+                messageContent = doc.to_dict()
+                if readMessages != readMessages:
+                    return None
+                else:
+                    return messageContent
+            
+            # Check if readMessages has changed
+
                 
-                
-                return messageContentDB
                 
     def readMessages():
         docs = db.collection(u'messages').stream()
