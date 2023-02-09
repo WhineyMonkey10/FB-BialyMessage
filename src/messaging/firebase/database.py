@@ -30,7 +30,7 @@ class Message:
             u'date': u"{}".format(datetime.datetime.now().strftime("%Y-%m-%d")),
         }
 
-        doc_ref = db.collection(u'messages').add(messageContent)
+        db.collection(u'messages').add(messageContent)
         
     def getMessages():
         docs = db.collection(u'messages').stream()
